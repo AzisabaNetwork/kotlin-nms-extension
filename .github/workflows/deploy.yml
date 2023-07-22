@@ -1,0 +1,29 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+jobs:
+  gradle-build:
+    runs-on: ubuntu-latest
+    name: "Build with Gradle"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup git
+        run: 'git config --global user.email "actions@github.com" && git config --global user.name "GitHub Actions"'
+      - name: Setup Java JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: temurin
+          cache: 'gradle'
+      - name: Prepare gradle.properties
+        run: |
+          mkdir -p $HOME/.gradle
+          echo "repoUsername=${{ secrets.REPO_USERNAME }}" >> $HOME/.gradle/gradle.properties
+          echo "repoPassword=${{ secrets.REPO_PASSWORD }}" >> $HOME/.gradle/gradle.properties
+          echo "azisabaNmsUsername=${{ secrets.REPO_USERNAME }}" >> $HOME/.gradle/gradle.properties
+          echo "azisabaNmsPassword=${{ secrets.REPO_PASSWORD }}" >> $HOME/.gradle/gradle.properties
+      - name: Run test and deploy
+        run: './gradlew test deploy --info --stacktrace'
