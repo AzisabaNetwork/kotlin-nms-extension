@@ -5,6 +5,8 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTTagList
 import java.util.*
 
+val NBTTagCompound.size: Int
+    get() = f()
 fun NBTTagCompound.getBoolean(key: String): Boolean = q(key)
 fun NBTTagCompound.setBoolean(key: String, value: Boolean) = a(key, value)
 operator fun NBTTagCompound.set(key: String, value: Boolean) = a(key, value)
