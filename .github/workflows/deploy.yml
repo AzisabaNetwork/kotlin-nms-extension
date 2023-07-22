@@ -26,4 +26,4 @@ jobs:
           echo "azisabaNmsUsername=${{ secrets.REPO_USERNAME }}" >> $HOME/.gradle/gradle.properties
           echo "azisabaNmsPassword=${{ secrets.REPO_PASSWORD }}" >> $HOME/.gradle/gradle.properties
       - name: Run test and deploy
-        run: './gradlew test deploy --info --stacktrace'
+        run: './gradlew test publish --info --stacktrace'
