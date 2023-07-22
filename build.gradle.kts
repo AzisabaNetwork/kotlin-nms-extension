@@ -25,6 +25,7 @@ allprojects {
     repositories {
         mavenLocal()
         mavenCentral()
+        maven { url = uri("https://libraries.minecraft.net/") }
         if (properties["azisabaNmsUsername"] != null && properties["azisabaNmsPassword"] != null) {
             maven {
                 name = "azisabaNms"
