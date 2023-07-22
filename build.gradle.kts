@@ -52,7 +52,6 @@ allprojects {
         publications {
             create<MavenPublication>("mavenJava") {
                 from(components["java"])
-                artifact(tasks.getByName("sourcesJar"))
 
                 artifactId = "kotlin-nms-extension-$artifactId"
             }
